@@ -36,7 +36,7 @@
         </h1>
         <div class="mallSearch">
           <form action="" class="layui-form" novalidate>
-            <input type="text" name="title" required  lay-verify="required" autocomplete="off" class="layui-input" placeholder="请输入需要的商品">
+            <input type="text" name="title" required  lay-verify="required"  class="layui-input" placeholder="请输入需要的商品">
             <button class="layui-btn" lay-submit lay-filter="formDemo">
                 <i class="layui-icon layui-icon-search"></i>
             </button>
@@ -65,24 +65,62 @@
       <div class="login-cont w1200">
         <div class="form-box">
           <form class="layui-form" action="">
-            <legend>登录</legend>
+            <legend>注册</legend>
             <div class="layui-form-item">
               <div class="layui-inline iphone">
                 <div class="layui-input-inline">
                   <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
-                  <input type="tel" name="username" id="username" lay-verify="required|phone" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                  <input type="text" name="username" id="username"  placeholder="请输入用户名"  class="layui-input">
                 </div>
               </div>
               <div class="layui-inline iphone">
                 <div class="layui-input-inline">
                   <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
-                  <input type="tel" name="password" id="password" lay-verify="required|phone" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                  <input type="password" name="password" id="password"  placeholder="请输入密码"  class="layui-input">
                 </div>
               </div>
+              <div class="layui-inline iphone">
+                <div class="layui-input-inline">
+                  <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                  <input type="text" name="phone" id="phone"  placeholder="请输入手机号码"  class="layui-input">
+                </div>
+              </div>
+
+              <div class="layui-inline iphone">
+                <div class="layui-input-inline">
+                  <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">下拉选择框</label>
+                    <div class="layui-input-block">
+                      <select name="sex" lay-filter="aihao">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="layui-inline iphone">
+                <div class="layui-input-inline">
+                  <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">下拉选择框</label>
+                    <div class="layui-input-block">
+                      <select name="status" lay-filter="aihao">
+                        <option value="1">管理员</option>
+                        <option value="2">老师</option>
+                        <option value="3">学生</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
             <div class="layui-form-item login-btn">
               <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="login_btn">登录</button>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="register_btn">注册</button>
               </div>
             </div>
           </form>
@@ -126,8 +164,8 @@
               layer.msg(msg);
           }
 
-   $("#login_btn").click(function () {
-       $(".layui-form").attr("action","/toLogin");
+   $("#register_btn").click(function () {
+       $(".layui-form").attr("action","/toRegister");
        $(".layui-form").submit();
    });
 

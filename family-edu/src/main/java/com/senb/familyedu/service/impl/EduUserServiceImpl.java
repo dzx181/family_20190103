@@ -6,6 +6,8 @@ import com.senb.familyedu.service.EduUserService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,5 @@ import org.springframework.stereotype.Service;
 @Service
 public class EduUserServiceImpl extends ServiceImpl<EduUserDao, EduUser> implements EduUserService {
 
+   
 }

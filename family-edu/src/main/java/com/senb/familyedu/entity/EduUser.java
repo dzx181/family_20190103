@@ -37,8 +37,8 @@ public class EduUser implements Serializable {
     /**
      * 用户名
      */
-    @TableField("usename")
-    private String usename;
+    @TableField("username")
+    private String username;
     /**
      * 密码
      */
