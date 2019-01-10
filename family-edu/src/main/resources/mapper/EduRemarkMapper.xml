@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.senb.familyedu.dao.EduRemarkDao">
-
+<select id="showRemarkByTeachId" resultType="com.senb.familyedu.entity.vo.EduRemarkVO" resultMap="remark_Map">
+    select * from edu_remark where user_tea_id = #{teacheId}
+</select>
+    <resultMap id="remark_Map" type="com.senb.familyedu.entity.vo.EduRemarkVO">
+        <id property="id" column="id"></id>
+        <result property="remark" column="remark"></result>
+        <result property="evaluate" column="evaluate"></result>
+        <association property="userStu" column="user_stu_id" javaType="com.senb.familyedu.entity.EduUser" select="com.senb.familyedu.dao.EduUserDao.selectEdueById"></association>
+    </resultMap>
 </mapper>

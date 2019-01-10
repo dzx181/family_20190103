@@ -9,7 +9,7 @@ package com.senb.familyedu.util;
  * @Date 2018/12/8 21:59
  */
 public class ConstUtil {
-    public final static  String GEN_PATH = "D:\\family_20190103\\family-edu\\upload";
+    public final static  String GEN_PATH = "D:\\family_20190103\\family-edu\\src\\main\\resources\\static\\upload";
 
 
 }

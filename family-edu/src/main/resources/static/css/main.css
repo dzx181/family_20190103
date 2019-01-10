@@ -264,7 +264,7 @@ i{font-style: normal;}
 .about-content .brief-content .img-box{float: left; width: 630px; height: 640px; position: relative; padding-right: 100px;}
 .about-content .brief-content .img-box .top{position: absolute; right: 100px; bottom: 0;}
 .about-content .brief-content .text{line-height: 45px; font-size: 20px; color: #888; padding-top: 130px;}
-.about-content .banner-text{height: 760px; width: 100%; background: url(../img/us_img3.png) no-repeat; background-size: cover;}
+.about-content .banner-text{height: 760px; width: 100%; background-color: #000000; background-size: cover;}
 .about-content .banner-text p{width: 446px; font-size: 20px; line-height: 45px; color: #888888; padding: 210px 0 0 55px;}
 .about-content .after-sale{padding-bottom: 204px;}
 .about-content .after-sale h4{font-size: 46px; color: #555; letter-spacing:8px; padding:190px 0 100px 0; text-align: center;}

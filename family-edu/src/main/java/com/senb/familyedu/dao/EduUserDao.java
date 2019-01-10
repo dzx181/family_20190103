@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2019-01-03
  */
 public interface EduUserDao extends BaseMapper<EduUser> {
-
+    EduUser selectEdueById(Integer userId);
 }
