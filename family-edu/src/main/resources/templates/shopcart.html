@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link rel="stylesheet" type="text/css" href="../res/static/css/main.css">
-  <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css">
-  <script type="text/javascript" src="../res/layui/layui.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href=layui/css/layui.css">
+  <script type="text/javascript" src=layui/layui.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 </head>
@@ -15,7 +15,7 @@
     <div class="site-nav w1200">
       <p class="sn-back-home">
         <i class="layui-icon layui-icon-home"></i>
-        <a href="#">首页</a>
+        <a href="index">首页</a>
       </p>
       <div class="sn-quick-menu">
         <div class="login"><a href="login.html">登录</a></div>
@@ -31,7 +31,7 @@
       <div class="headerCon">
         <h1 class="mallLogo">
           <a href="#" title="母婴商城">
-            <img src="../res/static/img/logo.png">
+            <img src="img/logo.png">
           </a>
         </h1>
         <div class="mallSearch">
@@ -55,7 +55,7 @@
           <div class="inner-cont2">
             <a href="commodity.html" class="active">所有商品</a>
             <a href="buytoday.html">今日团购</a>
-            <a href="information.html">母婴资讯</a>
+            <a href="information.html"  class="active" th:if="${session.user}==null?false:(${session.user.status}!=3?true:false)">新增课程</a>
             <a href="about.html">关于我们</a>
           </div>
         </div>
@@ -113,7 +113,7 @@
             </li>
             <li class="th th-item">
               <div class="item-cont">
-                <a href="javascript:;"><img src="../res/static/img/paging_img1.jpg" alt=""></a>
+                <a href="javascript:;"><img src="img/paging_img1.jpg" alt=""></a>
                 <div class="text">
                   <div class="title">宝宝T恤棉质小衫</div>
                   <p><span>粉色</span>  <span>130</span>cm</p>
@@ -147,7 +147,7 @@
             </li>
             <li class="th th-item">
               <div class="item-cont">
-                <a href="javascript:;"><img src="../res/static/img/paging_img2.jpg" alt=""></a>
+                <a href="javascript:;"><img src="img/paging_img2.jpg" alt=""></a>
                 <div class="text">
                   <div class="title">宝宝T恤棉质小衫</div>
                   <p><span>粉色</span>  <span>130</span>cm</p>
@@ -181,7 +181,7 @@
             </li>
             <li class="th th-item">
               <div class="item-cont">
-                <a href="javascript:;"><img src="../res/static/img/paging_img3.jpg" alt=""></a>
+                <a href="javascript:;"><img src="img/paging_img3.jpg" alt=""></a>
                 <div class="text">
                   <div class="title">宝宝T恤棉质小衫</div>
                   <p><span>粉色</span>  <span>130</span>cm</p>
@@ -222,7 +222,7 @@
             </li>
             <li class="th th-item">
               <div class="item-cont">
-                <a href="javascript:;"><img src="../res/static/img/paging_img1.jpg" alt=""></a>
+                <a href="javascript:;"><img src="img/paging_img1.jpg" alt=""></a>
                 <div class="text">
                   <div class="title">宝宝T恤棉质小衫</div>
                   <p><span>粉色</span>  <span>130</span>cm</p>
@@ -274,7 +274,7 @@
 
 <script type="text/javascript">
   layui.config({
-    base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+    base: 'js/util/' //你存放新模块的目录，注意，不是layui的模块目录
   }).use(['mm','jquery','element','car'],function(){
     var mm = layui.mm,$ = layui.$,element = layui.element,car = layui.car;
     

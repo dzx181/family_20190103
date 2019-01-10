@@ -15,12 +15,13 @@
     <div class="site-nav w1200">
       <p class="sn-back-home">
         <i class="layui-icon layui-icon-home"></i>
-        <a href="#">首页</a>
+        <a href="index">首页</a>
       </p>
       <div class="sn-quick-menu">
-        <div class="login"><a href="login.html">登录</a></div>
-        <div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>
-      </div>
+        <div class="login"><div th:if="${session.user==null}"><a href="/login">登录</a>&nbsp;&nbsp;<a href="register">注册</a>
+
+        </div>
+          <div th:if="${session.user!=null}">[[${session.user.username}]]&nbsp;&nbsp;<a href="toUpdateView" >个人中心</a>&nbsp;&nbsp;<a href="logOff" >退出登录</a></div></div>
     </div>
   </div>
 
@@ -55,7 +56,7 @@
           <div class="inner-cont2">
             <a href="commodity.html" class="active">所有商品</a>
             <a href="buytoday.html">今日团购</a>
-            <a href="information.html">母婴资讯</a>
+            <a href="information.html"  class="active" th:if="${session.user}==null?false:(${session.user.status}!=3?true:false)">新增课程</a>
             <a href="about.html">关于我们</a>
           </div>
         </div>
@@ -70,13 +71,13 @@
               <div class="layui-inline iphone">
                 <div class="layui-input-inline">
                   <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
-                  <input type="tel" name="username" id="username" lay-verify="required|phone" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                  <input type="tel" name="username" id="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-inline iphone">
                 <div class="layui-input-inline">
                   <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
-                  <input type="tel" name="password" id="password" lay-verify="required|phone" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                  <input type="tel" name="password" id="password"  placeholder="请输入密码" autocomplete="off" class="layui-input">
                 </div>
               </div>
             </div>

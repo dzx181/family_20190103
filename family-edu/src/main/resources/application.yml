@@ -1,6 +1,15 @@
 #配置端口号
 server:
   port: 8081
+  #设置session的超时时间，单位是分钟
+  servlet:
+    session:
+      #Duration转换字符串方式，默认为正，负以-开头，紧接着P，以下字母不区分大小写
+      #D ：天 T：天和小时之间的分隔符 H ：小时  M：分钟  S：秒 每个单位都必须是数字，且时分秒顺序不能乱
+      #比如P2dt3m5s   P3d  pt3h
+      timeout: PT5H
+
+
 spring:
   application:
     name: family-edu
@@ -10,6 +19,10 @@ spring:
     password: root
   thymeleaf:
     cache: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml

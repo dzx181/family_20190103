@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css">
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+</head>
+<body>
+
+<div class="site-nav-bg">
+    <div class="site-nav w1200">
+        <p class="sn-back-home">
+            <i class="layui-icon layui-icon-home"></i>
+            <a href="index">首页</a>
+        </p>
+        <div class="sn-quick-menu">
+            <div class="login"><div th:if="${session.user==null}"><a href="/login">登录</a>&nbsp;&nbsp;<a href="register">注册</a>
+
+            </div>
+                <div th:if="${session.user!=null}">[[${session.user.username}]]&nbsp;&nbsp;<a href="toUpdateView" >个人中心</a>&nbsp;&nbsp;<a href="logOff" >退出登录</a></div></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="header">
+    <div class="headerLayout w1200">
+        <div class="headerCon">
+            <h1 class="mallLogo">
+                <a href="#" title="母婴商城">
+                    <img src="img/logo.png">
+                </a>
+            </h1>
+            <div class="mallSearch">
+                <form action="" class="layui-form" novalidate>
+                    <input type="text" name="title" required lay-verify="required" class="layui-input"
+                           placeholder="请输入需要的商品">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">
+                        <i class="layui-icon layui-icon-search"></i>
+                    </button>
+                    <input type="hidden" name="" value="">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="content content-nav-base  login-content">
+    <div class="main-nav">
+        <div class="inner-cont0">
+            <div class="inner-cont1 w1200">
+                <div class="inner-cont2">
+                    <a href="commodity.html" class="active">所有商品</a>
+                    <a href="buytoday.html">今日团购</a>
+                    <a href="information.html"  class="active" th:if="${session.user}==null?false:(${session.user.status}!=3?true:false)">新增课程</a>
+                    <a href="about.html">关于我们</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login-bg">
+        <div class="login-cont w1200">
+            <div class="form-box">
+                <form class="layui-form" action="">
+                    <legend>个人信息</legend>
+                    <div class="layui-form-item">
+                        <div class="layui-inline iphone">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <input type="text" name="username" id="username" placeholder="请输入用户名"
+                                       class="layui-input" th:value="${eduUserEdit}==null?'':${eduUserEdit.username}">
+                            </div>
+                        </div>
+                        <div class="layui-inline iphone">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <input type="password" name="password" id="password" placeholder="请输入密码"
+                                       class="layui-input" th:value="${eduUserEdit}==null?'':${eduUserEdit.password}">
+                            </div>
+                        </div>
+                        <div class="layui-inline iphone">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <input type="text" name="phone" id="phone" placeholder="请输入手机号码" class="layui-input"
+                                       th:value="${eduUserEdit}==null?'':${eduUserEdit.phone}">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline iphone">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下拉选择框</label>
+                                    <div class="layui-input-block">
+                                        <select name="sex" >
+                                            <option value="" >请选择性别</option>
+                                            <option value="男" th:selected="${eduUserEdit.sex}=='男'">男</option>
+                                            <option value="女" th:selected="${eduUserEdit.sex}=='女'">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline iphone">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下拉选择框</label>
+                                    <div class="layui-input-block">
+                                        <select name="status" >
+                                            <option value="" >请选择状态</option>
+                                            <option value="1" th:selected="${eduUserEdit.status}==1">管理员</option>
+                                            <option value="2" th:selected="${eduUserEdit.status}==2">老师</option>
+                                            <option value="3" th:selected="${eduUserEdit.status}==3">学生</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="layui-form-item login-btn">
+                        <div class="layui-input-block">
+                            <input type="hidden" th:value="${eduUserEdit.id}" th:name="id"/>
+                            <input type="button" value="修改" id="edit_btn" class="layui-btn"/>
+                            <input type="reset" value="重置" id="reset_btn" class="layui-btn"/>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="ng-promise-box">
+        <div class="ng-promise w1200">
+            <p class="text">
+                <a class="icon1" href="javascript:;">7天无理由退换货</a>
+                <a class="icon2" href="javascript:;">满99元全场免邮</a>
+                <a class="icon3" style="margin-right: 0" href="javascript:;">100%品质保证</a>
+            </p>
+        </div>
+    </div>
+    <div class="mod_help w1200">
+        <p>
+            <a href="javascript:;">关于我们</a>
+            <span>|</span>
+            <a href="javascript:;">帮助中心</a>
+            <span>|</span>
+            <a href="javascript:;">售后服务</a>
+            <span>|</span>
+            <a href="javascript:;">母婴资讯</a>
+            <span>|</span>
+            <a href="javascript:;">关于货源</a>
+        </p>
+        <p class="coty">母婴商城版权所有 &copy; 2012-2020</p>
+    </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    layui.config({
+        base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
+    }).use(['jquery', 'form'], function () {
+        var $ = layui.$, form = layui.form;
+        var msg = [[${msg}]];
+        if (msg) {
+            layer.msg(msg);
+        }
+
+        $("#edit_btn").click(function () {
+            $(".layui-form").attr("action", "/toUpdate");
+            $(".layui-form").submit();
+        });
+
+    })
+</script>
+
+</body>
+</html>

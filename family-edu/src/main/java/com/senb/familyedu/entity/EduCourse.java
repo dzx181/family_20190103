@@ -3,16 +3,15 @@ package com.senb.familyedu.entity;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.annotations.Version;
+
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
 
 /**
  * <p>
@@ -67,6 +66,7 @@ public class EduCourse implements Serializable {
      */
     @TableField("week")
     private String week;
+
 
 
     public static final String ID = "id";

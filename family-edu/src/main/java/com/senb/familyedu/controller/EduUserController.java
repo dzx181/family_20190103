@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -47,11 +48,34 @@ public class EduUserController {
         return "login";
     }
 
+    @RequestMapping("/toUpdateView")
+    public String toUpdateView(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        EduUser eduUser = (EduUser) session.getAttribute("user");
+        request.setAttribute("eduUserEdit",eduUser);
+        //修改成功后的msg
+        String msg = (String) request.getAttribute("msg");
+        if (msg!=null){
+            request.setAttribute("msg",msg);
+            EntityWrapper<EduUser> entityWrapper = new EntityWrapper<>();
+            entityWrapper.setEntity(new EduUser().setId(eduUser.getId()));
+            EduUser newUser = eduUserService.selectOne(entityWrapper);
+            session.setAttribute("user",newUser);
+            request.setAttribute("eduUserEdit",newUser);
+        }
+
+        return "userInfo";
+    }
     @RequestMapping("/toUpdate")
     public String toUpdate(EduUser user, HttpServletRequest request) {
         boolean flag = eduUserService.updateById(user);
         if (flag){request.setAttribute("msg","修改成功");}
-        return "login";
+        return "forward:/toUpdateView";
+    }
+    @RequestMapping("/logOff")
+    public String logOff(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "index";
     }
 }
 
