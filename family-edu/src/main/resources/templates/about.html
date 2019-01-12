@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>edu家教平台</title>
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="layui/css/layui.css">
   <script type="text/javascript" src="layui/layui.js"></script>
@@ -11,41 +11,44 @@
 </head>
 <body>
 
-  <div class="site-nav-bg">
-    <div class="site-nav w1200">
-      <p class="sn-back-home">
-        <i class="layui-icon layui-icon-home"></i>
-        <a href="index">首页</a>
-      </p>
-      <div class="sn-quick-menu">
-        <div class="login"><a href="login.html">登录</a></div>
-        <div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>
+<div class="site-nav-bg">
+  <div class="site-nav w1200">
+    <p class="sn-back-home">
+      <i class="layui-icon layui-icon-home"></i>
+      <a href="index">首页</a>
+    </p>
+    <div class="sn-quick-menu">
+      <div class="login"><div th:if="${session.user==null}"><a href="/login">登录</a>&nbsp;&nbsp;<a href="register">注册</a>
+
+      </div>
+        <div th:if="${session.user!=null}">[[${session.user.username}]]&nbsp;&nbsp;<a href="toUpdateView" >个人中心</a>&nbsp;&nbsp;<a href="logOff" >退出登录</a></div></div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="header">
+  <div class="headerLayout w1200">
+    <div class="headerCon">
+      <h1 class="mallLogo">
+        <a href="#" title="">
+          <img src="img/logo.png">
+        </a>
+      </h1>
+      <div class="mallSearch">
+        <form action="" class="layui-form" id="selectCourse_from">
+          <input type="text" name="name"    class="layui-input" placeholder="请输入需要的课程名">
+          <button class="layui-btn" id="select_btn">
+            <i class="layui-icon layui-icon-search"></i>
+          </button>
+          <input type="hidden" name="" value="">
+        </form>
       </div>
     </div>
   </div>
-
-
-
-  <div class="header">
-    <div class="headerLayout w1200">
-      <div class="headerCon">
-        <h1 class="mallLogo">
-          <a href="#" title="母婴商城">
-            <img src="img/logo.png">
-          </a>
-        </h1>
-        <div class="mallSearch">
-          <form action="" class="layui-form" novalidate>
-            <input type="text" name="title" required  lay-verify="required" autocomplete="off" class="layui-input" placeholder="请输入需要的商品">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">
-                <i class="layui-icon layui-icon-search"></i>
-            </button>
-            <input type="hidden" name="" value="">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 
 
   <div class="content content-nav-base about-content">
@@ -54,9 +57,9 @@
         <div class="inner-cont1 w1200">
           <div class="inner-cont2">
             <a href="selectEduCourse">所有课程</a>
-            <a href="buytoday.html">今日团购</a>
+            <a href="selectCourseByUserId" th:if="${session.user}==null?false:${session.user.status}==3">选课管理</a>
             <a href="information.html"  class="active" th:if="${session.user}==null?false:(${session.user.status}!=3?true:false)">新增课程</a>
-            <a href="about.html"  class="active">关于我们</a>
+            <a href="about.html">关于我们</a>
           </div>
         </div>
       </div>
@@ -70,12 +73,12 @@
         <img class="top" src="img/us_img2.jpg">
       </div>
       <div class="text">
-        <p>我们的母婴产业2016年涉足母婴行业，以品牌经销为主，在强大市场的推动下，于2016年创立自己的独立品牌。公司立足于江西南昌，2年的品牌沉淀和运营经验让我们在行业中获得良好的口碑和市场份额。以直营+连锁加盟模式，让成功可复制，成为越来越多中小投资者的优选项目，更多的妈妈青睐我们的产品。</p>
+        <p>网上家教也叫网络家教，是学生登陆专业的网络家教平台，进入教学系统，一般这样的教学系统具备文字编辑、绘图、语音、视频、数据上传与存储等多项功能，教师通过教学系统可以与学生进行面对面一样的交流，彼此看得见，还能对话，板书内容。这种联通和交流是通过一种叫做网络白板的软件来实现的，教师在网络白板上写的东西，学生能马上看到，学生在上面做题，教师可以进行评改，网络白板相当于传统授课中教室里的黑板，能写能擦，它比黑板更方便，还可以翻页，容纳更多的讲课内容。</p>
       </div>
     </div>
     <div class="banner-text">
       <div class="w1200">
-        <p>我们的母婴产业2016年涉足母婴行业，以品牌经销为主，在强大市场的推动下，于2016年创立自己的独立品牌。公司立足于江西南昌，2年的品牌沉淀和运营经验让我们在行业中获得良好的口碑和市场份额。以直营+连锁加盟模式，让成功可复制，成为越来越多中小投资者的优选项目，更多的妈妈青睐我们的产品。</p>
+        <p>网上家教也叫网络家教，是学生登陆专业的网络家教平台，进入教学系统，一般这样的教学系统具备文字编辑、绘图、语音、视频、数据上传与存储等多项功能，教师通过教学系统可以与学生进行面对面一样的交流，彼此看得见，还能对话，板书内容。这种联通和交流是通过一种叫做网络白板的软件来实现的，教师在网络白板上写的东西，学生能马上看到，学生在上面做题，教师可以进行评改，网络白板相当于传统授课中教室里的黑板，能写能擦，它比黑板更方便，还可以翻页，容纳更多的讲课内容。</p>
       </div>
     </div>
     <div class="after-sale w1200">
@@ -91,7 +94,7 @@
           <div class="img-box">
             <img src="img/us_icon2.png">
           </div>
-          <p>全场满99元顺丰包邮</p>
+          <p>全场满99元纸质资料包邮</p>
         </div>
         <div class="item item3">
           <div class="img-box">

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>edu家教平台</title>
   <link rel="stylesheet" type="text/css" href="css/main.css" />
   <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
   <script type="text/javascript" src="layui/layui.js"></script>
@@ -31,14 +31,14 @@
     <div class="headerLayout w1200">
       <div class="headerCon">
         <h1 class="mallLogo">
-          <a href="#" title="母婴商城">
+          <a href="#" title="">
             <img src="img/logo.png">
           </a>
         </h1>
         <div class="mallSearch">
-          <form action="" class="layui-form" novalidate>
-            <input type="text" name="title" required  lay-verify="required" autocomplete="off" class="layui-input" placeholder="请输入需要的商品">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">
+          <form action="" class="layui-form" id="selectCourse_from">
+            <input type="text" name="name"    class="layui-input" placeholder="请输入需要的课程名">
+            <button class="layui-btn" id="select_btn">
                 <i class="layui-icon layui-icon-search"></i>
             </button>
             <input type="hidden" name="" value="">
@@ -55,7 +55,7 @@
         <div class="inner-cont1 w1200">
           <div class="inner-cont2">
             <a href="selectEduCourse">所有课程</a>
-            <a href="buytoday.html">今日团购</a>
+            <a href="selectCourseByUserId" th:if="${session.user}==null?false:${session.user.status}==3">选课管理</a>
             <a href="information.html"  class="active" th:if="${session.user}==null?false:(${session.user.status}!=3?true:false)">新增课程</a>
             <a href="about.html">关于我们</a>
           </div>
@@ -71,43 +71,43 @@
           <div class="nav-con">
             <ul class="normal-nav layui-clear">
               <li class="nav-item">
-                <div class="title">奶粉辅食</div>
-                <p><a href="#">奶粉</a><a href="#">捕食</a><a href="#">营养品</a></p>
+                <div class="title">经济课程</div>
+                <p><a href="#">银行</a><a href="#">证券</a><a href="#">股票</a></p>
                 <i class="layui-icon layui-icon-right"></i>
               </li>
               <li class="nav-item">
-                <div class="title">纸尿裤</div>
-                <p><a href="#">纸尿裤</a><a href="#">婴儿湿巾</a></p>
+                <div class="title">软件课程</div>
+                <p><a href="#">java</a><a href="#">C++</a></p>
                 <i class="layui-icon layui-icon-right"></i>
               </li>
               <li class="nav-item">
-                <div class="title">洗护用品</div>
-                <p><a href="#">母婴洗护用品</a><a href="#">孕婴童用品</a></p>
+                <div class="title">硬件课程</div>
+                <p><a href="#">电路板焊接</a><a href="#">电子工艺</a></p>
                 <i class="layui-icon layui-icon-right"></i>
               </li>
               <li class="nav-item">
-                <div class="title">儿童玩具</div>
-                <p><a href="#">婴幼玩具</a><a href="#">遥控玩具</a><a href="#">积木拼插</a></p>
+                <div class="title">艺术课程</div>
+                <p><a href="#">书法与篆刻</a><a href="#">演唱与表演</a><a href="#">口器</a></p>
                 <i class="layui-icon layui-icon-right"></i>
               </li>
               <li class="nav-item">
-                <div class="title">车窗座椅</div>
-                <p><a href="#">婴儿推车</a><a href="#">儿童安全座骑</a></p>
+                <div class="title">外语课程</div>
+                <p><a href="#">英语</a><a href="#">法语</a></p>
                 <i class="layui-icon layui-icon-right"></i>
               </li>
               <li class="nav-item">
-                <div class="title">儿童童鞋</div>
-                <p><a href="#">童装</a><a href="#">童鞋</a><a href="#">婴童内衣及配饰</a></p>
+                <div class="title">游戏课程</div>
+                <p><a href="#">unity3D</a><a href="#">绘画基础</a><a href="#">ui设计</a></p>
                 <i class="layui-icon layui-icon-right"></i>
               </li>
               <li class="nav-item">
-                <div class="title">儿童图片</div>
-                <p><a href="#">0-2岁</a><a href="#">早教启蒙</a><a href="#">孕产育儿</a></p>
+                <div class="title">摄影课程</div>
+                <p><a href="#">抓拍</a><a href="#">快拍</a><a href="#">ps</a></p>
                 <i class="layui-icon layui-icon-right"></i>
               </li>
               <li class="nav-item nobor">
-                <div class="title">孕妈专区</div>
-                <p><a href="#">孕妇装</a><a href="#">背婴带</a><a href="#">母婴服务</a></p>
+                <div class="title">数据教程</div>
+                <p><a href="#">线性代数</a><a href="#">工程数学</a><a href="#">高等数学</a></p>
                 <i class="layui-icon layui-icon-right"></i>
               </li>
             </ul>
@@ -115,8 +115,8 @@
         </div>
       </div>
       <div class="category-banner">
-        <div class="w1200">
-          <img src="img/banner1.jpg">
+        <div class="w1200" style="text-align: center">
+          <img src="img/banner1.jpg" style="margin: 0 auto">
         </div>
       </div>
     </div>
@@ -134,7 +134,7 @@
                 <div class="item-box">
                   <div class="item">
                     <a href="javascript:;"><img src="img/s_img2.jpg"></a>
-                    <div class="title">宝宝五彩袜棉质舒服</div>
+                    <div class="title">编织属于你自己的衣物</div>
                     <div class="price">
                       <span>￥49.00</span>
                       <del>￥99.00</del>
@@ -142,7 +142,7 @@
                   </div>
                   <div class="item">
                     <a href="javascript:;"><img src="img/s_img3.jpg"></a>
-                    <div class="title">宝宝五彩袜棉质舒服</div>
+                    <div class="title">编织属于你自己的衣物</div>
                     <div class="price">
                       <span>￥49.00</span>
                       <del>￥99.00</del>
@@ -150,7 +150,7 @@
                   </div>
                   <div class="item">
                     <a href="javascript:;"><img src="img/s_img4.jpg"></a>
-                    <div class="title">宝宝五彩袜棉质舒服</div>
+                    <div class="title">编织属于你自己的衣物</div>
                     <div class="price">
                       <span>￥49.00</span>
                       <del>￥99.00</del>
@@ -158,7 +158,7 @@
                   </div>
                   <div class="item">
                     <a href="javascript:;"><img src="img/s_img5.jpg"></a>
-                    <div class="title">宝宝五彩袜棉质舒服</div>
+                    <div class="title">编织属于你自己的衣物</div>
                     <div class="price">
                       <span>￥49.00</span>
                       <del>￥99.00</del>
@@ -168,7 +168,7 @@
                 <div class="item-box">
                   <div class="item">
                     <a href="javascript:;"><img src="img/s_img2.jpg"></a>
-                    <div class="title">宝宝五彩袜棉质舒服</div>
+                    <div class="title">编织属于你自己的衣物</div>
                     <div class="price">
                       <span>￥49.00</span>
                       <del>￥99.00</del>
@@ -176,7 +176,7 @@
                   </div>
                   <div class="item">
                     <a href="javascript:;"><img src="img/s_img3.jpg"></a>
-                    <div class="title">宝宝五彩袜棉质舒服</div>
+                    <div class="title">编织属于你自己的衣物</div>
                     <div class="price">
                       <span>￥49.00</span>
                       <del>￥99.00</del>
@@ -184,7 +184,7 @@
                   </div>
                   <div class="item">
                     <a href="javascript:;"><img src="img/s_img4.jpg"></a>
-                    <div class="title">宝宝五彩袜棉质舒服</div>
+                    <div class="title">编织属于你自己的衣物</div>
                     <div class="price">
                       <span>￥49.00</span>
                       <del>￥99.00</del>
@@ -192,7 +192,7 @@
                   </div>
                   <div class="item">
                     <a href="javascript:;"><img src="img/s_img5.jpg"></a>
-                    <div class="title">宝宝五彩袜棉质舒服</div>
+                    <div class="title">编织属于你自己的衣物</div>
                     <div class="price">
                       <span>￥49.00</span>
                       <del>￥99.00</del>
@@ -208,242 +208,12 @@
 
 
 
-
-
-
-    <div class="hot-recommend-con">
-       <div class="hot-con1 w1200 layui-clear">
-          <div class="item">
-            <h4>热销推荐</h4>
-            <div class="big-img">
-              <a href="javascript:;"><img src="img/hot1.png"></a>
-            </div>
-            <div class="small-img">
-              <a href="javascript:;"><img src="img/hot2.png" alt=""></a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="top-img">
-              <a href="javascript:;"><img src="img/hot5.jpg"></a>
-            </div>
-            <div class="bottom-img">
-              <a href="javascript:;"><img src="img/hot6.jpg"></a>
-              <a class="baby-cream" href="javascript:;"><img src="img/hot7.jpg"></a>
-            </div>
-          </div>
-          <div class="item item1 margin0 padding0">
-            <a href="javascript:;"><img src="img/hot8.jpg"></a>
-            <a href="javascript:;"><img class="btm-img" src="img/hot9.jpg"></a>
-          </div>
-      </div>
-    </div>
-    
-
-
-    <div class="product-cont w1200" id="product-cont">
-      <div class="product-item product-item1 layui-clear">
-        <div class="left-title">
-          <h4><i>1F</i></h4>
-          <img src="img/icon_gou.png">
-          <h5>宝宝服饰</h5>
-        </div>
-        <div class="right-cont">
-          <a href="javascript:;" class="top-img"><img src="img/img12.jpg" alt=""></a>
-          <div class="img-box">
-            <a href="javascript:;"><img src="img/s_img7.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img8.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img9.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img10.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img11.jpg"></a>
-          </div>
-        </div>
-      </div>
-      <div class="product-item product-item2 layui-clear">
-        <div class="left-title">
-          <h4><i>2F</i></h4>
-          <img src="img/icon_gou.png">
-          <h5>奶粉辅食</h5>
-        </div>
-        <div class="right-cont">
-          <a href="javascript:;" class="top-img"><img src="img/img12.jpg" alt=""></a>
-          <div class="img-box">
-            <a href="javascript:;"><img src="img/s_img7.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img8.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img9.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img10.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img11.jpg"></a>
-          </div>
-        </div>
-      </div>
-      <div class="product-item product-item3 layui-clear">
-        <div class="left-title">
-          <h4><i>3F</i></h4>
-          <img src="img/icon_gou.png">
-          <h5>宝宝用品</h5>
-        </div>
-        <div class="right-cont">
-          <a href="javascript:;" class="top-img"><img src="img/img12.jpg" alt=""></a>
-          <div class="img-box">
-            <a href="javascript:;"><img src="img/s_img7.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img8.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img9.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img10.jpg"></a>
-            <a href="javascript:;"><img src="img/s_img11.jpg"></a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-list-box" id="product-list-box">
-      <div class="product-list-cont w1200">
-        <h4>更多推荐</h4>
-        <div class="product-item-box layui-clear">
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more1.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more2.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more3.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more1.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more2.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more3.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more1.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more2.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more3.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more1.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more2.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more3.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more1.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more2.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more3.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more1.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more2.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more3.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more1.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more2.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more3.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more1.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more2.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more3.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more1.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more2.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-          <div class="list-item">
-            <a href="javascript:;"><img src="img/more3.jpg"></a>
-            <p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>
-            <span>￥100.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="footer">
     <div class="ng-promise-box">
       <div class="ng-promise w1200">
         <p class="text">
           <a class="icon1" href="javascript:;">7天无理由退换货</a>
-          <a class="icon2" href="javascript:;">满99元全场免邮</a>
+          <a class="icon2" href="javascript:;">满99元全场纸质资料免邮</a>
           <a class="icon3" style="margin-right: 0" href="javascript:;">100%品质保证</a>
         </p>
       </div>
@@ -456,47 +226,44 @@
         <span>|</span>
         <a href="javascript:;">售后服务</a>
         <span>|</span>
-        <a href="javascript:;">母婴资讯</a>
+        <a href="javascript:;">家教资讯</a>
         <span>|</span>
-        <a href="javascript:;">关于货源</a>
+        <a href="javascript:;">关于课源</a>
       </p>
-      <p class="coty">母婴商城版权所有 &copy; 2012-2020</p>
+      <p class="coty">edu家教版权所有 &copy; 2012-2020</p>
     </div>
   </div>
   <script type="text/javascript">
 
 layui.config({
     base: 'js/util/' //你存放新模块的目录，注意，不是layui的模块目录
-  }).use(['mm','carousel'],function(){
-      var carousel = layui.carousel,
-     mm = layui.mm;
-     var option = {
+  }).use(['mm','carousel'],function() {
+    var carousel = layui.carousel,
+        mm = layui.mm;
+    var option = {
         elem: '#test1'
-        ,width: '100%' //设置容器宽度
-        ,arrow: 'always'
-        ,height:'298' 
-        ,indicator:'none'
-      }
-      carousel.render(option);
-      // 模版引擎导入
-     // var ins = carousel.render(option);
-     // var html = demo.innerHTML;
-     // var listCont = document.getElementById('list-cont');
-     // // console.log(layui.router("#/about.html"))
-     //  mm.request({
-     //    url: '../json/index.json',
-     //    success : function(res){
-     //      console.log(res)
-     //      listCont.innerHTML = mm.renderHtml(html,res)
-     //      ins.reload(option);
-     //    },
-     //    error: function(res){
-     //      console.log(res);
-     //    }
-     //  })
+        , width: '100%' //设置容器宽度
+        , arrow: 'always'
+        , height: '298'
+        , indicator: 'none'
+    }
+    carousel.render(option);
+});
+    layui.config({
+        base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
+    }).use(['jquery','form'],function(){
+        var $ = layui.$,form = layui.form;
+
+        $("#select_btn").click(function () {
+            $("#selectCourse_from").attr("action","/selectEduCourse");
+            $("#selectCourse_from").submit();
+        });
+
+    })
+
     
 
-});
+
   </script>
 </body>
 </html>

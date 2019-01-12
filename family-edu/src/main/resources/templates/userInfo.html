@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>edu家教平台</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="layui/css/layui.css">
     <script type="text/javascript" src="layui/layui.js"></script>
@@ -32,15 +32,14 @@
     <div class="headerLayout w1200">
         <div class="headerCon">
             <h1 class="mallLogo">
-                <a href="#" title="母婴商城">
+                <a href="#" title="edu家教平台">
                     <img src="img/logo.png">
                 </a>
             </h1>
             <div class="mallSearch">
-                <form action="" class="layui-form" novalidate>
-                    <input type="text" name="title" required lay-verify="required" class="layui-input"
-                           placeholder="请输入需要的商品">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">
+                <form action="" class="layui-form" id="selectCourse_from">
+                    <input type="text" name="name"    class="layui-input" placeholder="请输入需要的课程名">
+                    <button class="layui-btn" id="select_btn">
                         <i class="layui-icon layui-icon-search"></i>
                     </button>
                     <input type="hidden" name="" value="">
@@ -57,7 +56,7 @@
             <div class="inner-cont1 w1200">
                 <div class="inner-cont2">
                     <a href="selectEduCourse">所有课程</a>
-                    <a href="buytoday.html">今日团购</a>
+                    <a href="selectCourseByUserId" th:if="${session.user}==null?false:${session.user.status}==3">选课管理</a>
                     <a href="information.html"  class="active" th:if="${session.user}==null?false:(${session.user.status}!=3?true:false)">新增课程</a>
                     <a href="about.html">关于我们</a>
                 </div>
@@ -162,7 +161,7 @@
             <span>|</span>
             <a href="javascript:;">关于货源</a>
         </p>
-        <p class="coty">母婴商城版权所有 &copy; 2012-2020</p>
+        <p class="coty">edu家教平台版权所有 &copy; 2012-2020</p>
     </div>
 </div>
 <script type="text/javascript" th:inline="javascript">
@@ -178,6 +177,17 @@
         $("#edit_btn").click(function () {
             $(".layui-form").attr("action", "/toUpdate");
             $(".layui-form").submit();
+        });
+
+    })
+    layui.config({
+        base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
+    }).use(['jquery','form'],function(){
+        var $ = layui.$,form = layui.form;
+
+        $("#select_btn").click(function () {
+            $("#selectCourse_from").attr("action","/selectEduCourse");
+            $("#selectCourse_from").submit();
         });
 
     })

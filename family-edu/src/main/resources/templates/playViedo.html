@@ -1,130 +1,213 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <link rel="stylesheet" type="text/css" href="layui/css/layui.css">
-  <script type="text/javascript" src="layui/layui.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <style>
+    <meta charset="UTF-8">
+    <title>edu家教平台</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css">
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <style>
 
-  </style>
+    </style>
 </head>
 <body>
-
-  <div class="site-nav-bg">
+<div class="site-nav-bg">
     <div class="site-nav w1200">
-      <p class="sn-back-home">
-        <i class="layui-icon layui-icon-home"></i>
-        <a href="index">首页</a>
-      </p>
-      <div class="sn-quick-menu">
-        <div class="login"><a href="login.html">登录</a></div>
-        <div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>
-      </div>
+        <p class="sn-back-home">
+            <i class="layui-icon layui-icon-home"></i>
+            <a href="index">首页</a>
+        </p>
+        <div class="sn-quick-menu">
+            <div class="login"><div th:if="${session.user==null}"><a href="/login">登录</a>&nbsp;&nbsp;<a href="register">注册</a>
+
+            </div>
+                <div th:if="${session.user!=null}">[[${session.user.username}]]&nbsp;&nbsp;<a href="toUpdateView" >个人中心</a>&nbsp;&nbsp;<a href="logOff" >退出登录</a></div></div>
+
+        </div>
     </div>
-  </div>
+</div>
 
 
-
-  <div class="header">
+<div class="header">
     <div class="headerLayout w1200">
-      <div class="headerCon">
-        <h1 class="mallLogo">
-          <a href="#" title="母婴商城">
-            <img src="img/logo.png">
-          </a>
-        </h1>
-        <div class="mallSearch">
-          <form action="" class="layui-form" novalidate>
-            <input type="text" name="title" required  lay-verify="required" autocomplete="off" class="layui-input" placeholder="请输入需要的商品">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">
-                <i class="layui-icon layui-icon-search"></i>
-            </button>
-            <input type="hidden" name="" value="">
-          </form>
+        <div class="headerCon">
+            <h1 class="mallLogo">
+                <a href="#" title="edu">
+                    <img src="img/logo.png">
+                </a>
+            </h1>
+            <div class="mallSearch">
+                <form action="" class="layui-form" id="selectCourse_from">
+                    <input type="text" name="name"    class="layui-input" placeholder="请输入需要的课程名">
+                    <button class="layui-btn" id="select_btn">
+                        <i class="layui-icon layui-icon-search"></i>
+                    </button>
+                    <input type="hidden" name="" value="">
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
-  <div class="content content-nav-base about-content">
+<div class="content content-nav-base about-content">
     <div class="main-nav">
-      <div class="inner-cont0">
-        <div class="inner-cont1 w1200">
-          <div class="inner-cont2">
-            <a href="selectEduCourse">所有课程</a>
-            <a href="buytoday.html">今日团购</a>
-            <a href="information.html"  class="active" th:if="${session.user}==null?false:(${session.user.status}!=3?true:false)">新增课程</a>
-            <a href="about.html"  class="active">关于我们</a>
-          </div>
+        <div class="inner-cont0">
+            <div class="inner-cont1 w1200">
+                <div class="inner-cont2">
+                    <a href="selectEduCourse">所有课程</a>
+                    <a href="selectCourseByUserId" th:if="${session.user}==null?false:${session.user.status}==3">选课管理</a>
+                    <a href="information.html" class="active"
+                       th:if="${session.user}==null?false:(${session.user.status}!=3?true:false)">新增课程</a>
+                    <a href="about.html" class="active">关于我们</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <div class="banner-text">
-      <div class="w1200" style="background: #000000">
-<!--视频-->
-        <div class="box6">
-        <video th:src="@{'/upload/'+${eduCourseById.vedio}}" controls="controls" style="height: 745px;width: 100%;margin-top: 5px">
-          您的浏览器不支持 video 标签。
-        </video>
+        <div class="w1200" style="background: #000000">
+            <!--视频-->
+            <div class="box6">
+                <video th:src="@{'/upload/'+${eduCourseById.vedio}}" controls="controls"
+                       style="height: 745px;width: 100%;margin-top: 5px">
+                    您的浏览器不支持 video 标签。
+                </video>
+            </div>
+
+        </div>
+    </div>
+    <div class=" w1200" style="margin-top: 15px;">
+        <div class="form-box">
+            <form class="layui-form" action="">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">评价：</label>
+                    <div class="layui-input-block">
+                        <input name="remark" placeholder="请输入内容" class="layui-textarea" id="remark"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">评分：</label>
+                    <div class="layui-inline iphone">
+                        <div class="layui-input-inline">
+
+                            <select name="evaluate" id="evaluate">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" id="submit_btn">立即评论</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+
+                <input type="hidden" name="userTeaId" th:value="${eduCourseById.userTea.id}" id="user_tea_id"/>
+                <input type="hidden" name="courseId" th:value="${eduCourseById.id}" id="courseId"/>
+            </form>
+        </div>
+    </div>
+    <div id="contentId">
+
+        <div th:each="remark:${eduRemarkList}"
+             style="background: #F5F5F5;width: 1200px;height: 100px;margin: 10px auto 0px auto;">
+            <span class="layui-badge layui-bg-orange"> [[${remark.userStu.username}]]</span>
+            <p>评价：[[${remark.remark}]]</p>
+            <p>评分：
+                <span th:if="${remark.evaluate}==1"><i class="layui-icon layui-icon-face-smile"
+                                                       style="font-size: 30px; color: #1E9FFF;"></i> </span>
+                <span th:if="${remark.evaluate}==2"><i class="layui-icon layui-icon-face-smile"
+                                                       style="font-size: 30px; color: #1E9FFF;"></i><i
+                        class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i></span>
+                <span th:if="${remark.evaluate}==3"><i class="layui-icon layui-icon-face-smile"
+                                                       style="font-size: 30px; color: #1E9FFF;"></i><i
+                        class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i
+                        class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i>   </span>
+                <span th:if="${remark.evaluate}==4"><i class="layui-icon layui-icon-face-smile"
+                                                       style="font-size: 30px; color: #1E9FFF;"></i><i
+                        class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i
+                        class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i
+                        class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i> </span>
+                <span th:if="${remark.evaluate}==5"><i class="layui-icon layui-icon-face-smile"
+                                                       style="font-size: 30px; color: #1E9FFF;"></i><i
+                        class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i
+                        class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i
+                        class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i
+                        class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i> </span>
+            </p>
+
         </div>
 
-      </div>
     </div>
-
-      <div th:each="remark:${eduRemarkList}" style="background: #F5F5F5;width: 1200px;height: 100px;margin: 10px auto 0px auto;">
-        <span class="layui-badge layui-bg-orange"> [[${remark.userStu.username}]]</span>
-        <p>评价：[[${remark.remark}]]</p>
-        <p>评分：
-          <span th:if="${remark.evaluate}==1" ><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i> </span>
-          <span th:if="${remark.evaluate}==2" ><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i></span>
-          <span th:if="${remark.evaluate}==3" ><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i>   </span>
-          <span th:if="${remark.evaluate}==4" ><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i> </span>
-          <span th:if="${remark.evaluate}==5" ><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i> </span>
-          </p>
-      </div>
-
     <div class="after-sale w1200">
-      <h4>配送售后</h4>
-      <div class="item-box">
-        <div class="item item1">
-          <div class="img-box">
-            <img src="img/us_icon1.png">
-          </div>
-          <p>7天无理由退换货</p>
+        <h4>配送售后</h4>
+        <div class="item-box">
+            <div class="item item1">
+                <div class="img-box">
+                    <img src="img/us_icon1.png">
+                </div>
+                <p>7天无理由退换货</p>
+            </div>
+            <div class="item item2">
+                <div class="img-box">
+                    <img src="img/us_icon2.png">
+                </div>
+                <p>全场课程纸质课程资料包邮</p>
+            </div>
+            <div class="item item3">
+                <div class="img-box">
+                    <img src="img/us_icon3.png">
+                </div>
+                <p>优质客服服务</p>
+            </div>
         </div>
-        <div class="item item2">
-          <div class="img-box">
-            <img src="img/us_icon2.png">
-          </div>
-          <p>全场课程纸质课程资料包邮</p>
-        </div>
-        <div class="item item3">
-          <div class="img-box">
-            <img src="img/us_icon3.png">
-          </div>
-          <p>优质客服服务</p>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+    layui.use('form', function () {
+        var form = layui.form;
 
-layui.config({
-    base: 'js/util/' //你存放新模块的目录，注意，不是layui的模块目录
-  }).use(['mm'],function(){
-      var
-     mm = layui.mm;
-  
-    
+    });
+    layui.config({
+        base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
+    }).use(['jquery', 'form'], function () {
+        var $ = layui.$, form = layui.form;
+        var msg = [[${msg}]];
+        if (msg) {
+            layer.msg(msg);
+        }
+        var msg = [[${msg}]];
+        if (msg) {
+            layer.msg(msg);
+        }
+        $("#submit_btn").click(function () {
+            $(".layui-form").attr("action", "/insertRemark");
+            $(".layui-form").submit();
+        });
 
-});
+    })
+    layui.config({
+        base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
+    }).use(['jquery','form'],function(){
+        var $ = layui.$,form = layui.form;
+
+        $("#select_btn").click(function () {
+            $("#selectCourse_from").attr("action","/selectEduCourse");
+            $("#selectCourse_from").submit();
+        });
+
+    })
 </script>
 </body>
 </html>

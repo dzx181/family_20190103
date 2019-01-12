@@ -104,8 +104,18 @@ public class EduCourseController {
 
 
     @RequestMapping("/selectEduCourse")
-    public String selectEduCourse(HttpServletRequest request) {
-       List<EduCourse> eduCourseList = eduCourseService.selectList(null);
+    public String selectEduCourse(EduCourse course,HttpServletRequest request) {
+        //选课成功后的反馈信息
+        String msg = (String) request.getAttribute("msg");
+        if (msg!=null){request.setAttribute("msg",msg);}
+        EntityWrapper<EduCourse> eduCourseEntityWrapper = new EntityWrapper<>();
+        List<EduCourse> eduCourseList = null;
+        if (course.getName()!=null){
+           eduCourseList = eduCourseService.selectList(eduCourseEntityWrapper.like("name",course.getName()));
+        }else {
+            eduCourseList = eduCourseService.selectList(null);
+        }
+
        request.setAttribute("eduCourseList",eduCourseList);
        request.setAttribute("courseSize",eduCourseList.size());
         return "commodity";
@@ -121,19 +131,12 @@ public class EduCourseController {
         return "playViedo";
     }
 
-//    /**
-//     * 删除文件
-//     *
-//     * @param caption
-//     * @return
-//     */
-//    @RequestMapping("/deleteDocs")
-//    public String deleteDocs(Integer[] caption) {
-//        docService.deleteDoc(Arrays.asList(caption));
-//        return "redirect:/selectDoc";
-//
-//    }
-
+    @RequestMapping("/deleteCourse")
+    public String deleteCourse(Integer courseId,HttpServletRequest request) {
+        //查找具体的视频课程
+        eduCourseService.deleteById(courseId);
+        return "redirect:/selectEduCourse";
+    }
 
 
 

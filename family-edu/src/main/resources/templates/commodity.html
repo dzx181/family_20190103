@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>edu家教平台</title>
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="layui/css/layui.css">
   <script type="text/javascript" src="layui/layui.js"></script>
@@ -10,19 +10,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 </head>
 <body>
+<div class="site-nav-bg">
+  <div class="site-nav w1200">
+    <p class="sn-back-home">
+      <i class="layui-icon layui-icon-home"></i>
+      <a href="index">首页</a>
+    </p>
+    <div class="sn-quick-menu">
+      <div class="login"><div th:if="${session.user==null}"><a href="/login">登录</a>&nbsp;&nbsp;<a href="register">注册</a>
 
-  <div class="site-nav-bg">
-    <div class="site-nav w1200">
-      <p class="sn-back-home">
-        <i class="layui-icon layui-icon-home"></i>
-        <a href="index">首页</a>
-      </p>
-      <div class="sn-quick-menu">
-        <div class="login"><a href="login.html">登录</a></div>
-        <div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>
       </div>
+        <div th:if="${session.user!=null}">[[${session.user.username}]]&nbsp;&nbsp;<a href="toUpdateView" >个人中心</a>&nbsp;&nbsp;<a href="logOff" >退出登录</a></div></div>
+
     </div>
   </div>
+</div>
 
 
 
@@ -30,15 +32,15 @@
     <div class="headerLayout w1200">
       <div class="headerCon">
         <h1 class="mallLogo">
-          <a href="#" title="母婴商城">
+          <a href="#" title="">
             <img src="img/logo.png">
           </a>
         </h1>
         <div class="mallSearch">
-          <form action="" class="layui-form" novalidate>
-            <input type="text" name="title" required  lay-verify="required" autocomplete="off" class="layui-input" placeholder="请输入需要的商品">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">
-                <i class="layui-icon layui-icon-search"></i>
+          <form action="" class="layui-form" id="selectCourse_from">
+            <input type="text" name="name"    class="layui-input" placeholder="请输入需要的课程名">
+            <button class="layui-btn" id="select_btn">
+              <i class="layui-icon layui-icon-search"></i>
             </button>
             <input type="hidden" name="" value="">
           </form>
@@ -54,7 +56,7 @@
         <div class="inner-cont1 w1200">
           <div class="inner-cont2">
             <a href="selectEduCourse">所有课程</a>
-            <a href="buytoday.html">今日团购</a>
+            <a href="selectCourseByUserId" th:if="${session.user}==null?false:${session.user.status}==3">选课管理</a>
             <a href="information.html"  class="active" th:if="${session.user}==null?false:(${session.user.status}!=3?true:false)">新增课程</a>
             <a href="about.html">关于我们</a>
           </div>
@@ -67,46 +69,43 @@
           <div class="title">所有分类</div>
           <div class="list-box">
             <dl>
-             <dt>奶粉辅食</dt>
-             <dd><a href="javascript:;">进口奶粉</a></dd>
-             <dd><a href="javascript:;">宝宝辅食</a></dd>
-             <dd><a href="javascript:;">营养品</a></dd>
+             <dt>经济课程</dt>
+             <dd><a href="javascript:;">银行</a></dd>
+             <dd><a href="javascript:;">证券</a></dd>
+             <dd><a href="javascript:;">股票</a></dd>
             </dl>
             <dl>
-             <dt>儿童用品</dt>
-             <dd><a href="javascript:;">纸尿裤</a></dd>
-             <dd><a href="javascript:;">婴儿湿巾</a></dd>
-             <dd><a href="javascript:;">婴儿车</a></dd>
-             <dd><a href="javascript:;">婴儿床</a></dd>
-             <dd><a href="javascript:;">儿童安全座椅</a></dd>
+             <dt>软件课程</dt>
+             <dd><a href="javascript:;">java</a></dd>
+             <dd><a href="javascript:;">C++</a></dd>
+
             </dl>
             <dl>
-             <dt>儿童早教</dt>
-             <dd><a href="javascript:;">儿童玩具</a></dd>
-             <dd><a href="javascript:;">早教书籍</a></dd>
-             <dd><a href="javascript:;">孕产育儿书</a></dd>
+             <dt>硬件课程</dt>
+             <dd><a href="javascript:;">电路板焊接</a></dd>
+             <dd><a href="javascript:;">电子工艺</a></dd>
+
             </dl>
             <dl>
-             <dt>儿童服饰</dt>
-             <dd><a href="javascript:;">童装</a></dd>
-             <dd><a href="javascript:;">童鞋</a></dd>
-             <dd><a href="javascript:;">宝宝配饰</a></dd>
+             <dt>艺术课程</dt>
+             <dd><a href="javascript:;">书法与篆刻</a></dd>
+             <dd><a href="javascript:;">演唱与表演</a></dd>
+             <dd><a href="javascript:;">口器</a></dd>
             </dl>
             <dl>
-             <dt>孕妈专区</dt>
-             <dd><a href="javascript:;">孕妇装</a></dd>
-             <dd><a href="javascript:;">孕妇护肤</a></dd>
-             <dd><a href="javascript:;">孕妇用品</a></dd>
+             <dt>外语课程</dt>
+             <dd><a href="javascript:;">英语</a></dd>
+             <dd><a href="javascript:;">法语</a></dd>
             </dl>
           </div>
         </div>
         <div class="right-cont-wrap">
           <div class="right-cont">
             <div class="sort layui-clear">
-              <a class="active" href="javascript:;" event = 'volume'>销量</a>
-              <a href="javascript:;" event = 'price'>价格</a>
-              <a href="javascript:;" event = 'newprod'>新品</a>
-              <a href="javascript:;" event = 'collection'>收藏</a>
+              <!--<a class="active" href="javascript:;" event = 'volume'>销量</a>-->
+              <!--<a href="javascript:;" event = 'price'>价格</a>-->
+              <!--<a href="javascript:;" event = 'newprod'>新品</a>-->
+              <!--<a href="javascript:;" event = 'collection'>收藏</a>-->
             </div>
             <div class="prod-number">
               <span>共<span style="color: red">[[${courseSize}]]</span>套课程视频</span>
@@ -122,6 +121,9 @@
                   <p style="font-size: 15px;">上课时间：[[${course.week}]]&nbsp;[[${course.timeSection}]]&nbsp;&nbsp;
                     <a th:href="'downloadFile?courseId='+${course.id}"><i class="layui-icon layui-icon-download-circle" style=" color: #1E9FFF;"></i> </a>
                     <a th:href="'selectCourse?courseId='+${course.id}" th:if="${session.user.status}==3"><i class="layui-icon layui-icon-add-circle-fine" style="color: #1E9FFF;"></i> </a>
+                    <a th:href="'deleteCourse?courseId='+${course.id}" th:if="${session.user.status}==1 "><i class="layui-icon layui-icon-delete" style="color: #1E9FFF;"></i> </a>
+                    <a th:href="'deleteCourse?courseId='+${course.id}" th:if="${session.user.status}==2 "><i class="layui-icon layui-icon-delete" style="color: #1E9FFF;"></i> </a>
+
                   </p>
 
                 </div>
@@ -136,11 +138,11 @@
       </div>
     </div>
   </div>
-<script>
+<script th:inline="javascript">
 
   layui.config({
     base: 'js/util/' //你存放新模块的目录，注意，不是layui的模块目录
-  }).use(['mm','laypage','jquery'],function(){
+  }).use(['mm','laypage','jquery','form'],function(){
       var laypage = layui.laypage,$ = layui.$,
      mm = layui.mm;
        laypage.render({
@@ -149,20 +151,17 @@
       });
 
 
-    // 模版引擎导入
-    //  var html = demo.innerHTML;
-    //  var listCont = document.getElementById('list-cont');
-    //  // console.log(layui.router("#/about.html"))
-    // mm.request({
-    //     url: '../json/commodity.json',
-    //     success : function(res){
-    //       console.log(res)
-    //       listCont.innerHTML = mm.renderHtml(html,res)
-    //     },
-    //     error: function(res){
-    //       console.log(res);
-    //     }
-    //   })
+          var $ = layui.$,form = layui.form;
+          var msg = [[${msg}]];
+          if (msg){
+              layer.msg(msg);
+          }
+          $("#select_btn").click(function () {
+              $("#selectCourse_from").attr("action","/selectEduCourse");
+              $("#selectCourse_from").submit();
+          });
+
+
 
     $('.sort a').on('click',function(){
       $(this).addClass('active').siblings().removeClass('active');

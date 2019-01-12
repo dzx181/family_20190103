@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -31,7 +32,9 @@ public class EduUserController {
 
     @RequestMapping("/toLogin")
     public String toLogin(EduUser user, HttpServletRequest request) {
+        //查询所有的老师
         EntityWrapper<EduUser> entityWrapper = new EntityWrapper<>();
+        //登录逻辑
         entityWrapper.setEntity(user);
         EduUser eduUser = eduUserService.selectOne(entityWrapper);
         if (eduUser!=null){
