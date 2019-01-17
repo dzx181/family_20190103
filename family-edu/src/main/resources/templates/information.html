@@ -141,14 +141,14 @@
     </div>
   </div>
   </div>
-<script src="js/util/jquery-3.1.1.min.js" type="application/javascript"></script>
+<script src="js/util/jquery-3.1.1.min.js" type="application/javascript" charset="UTF-8"></script>
     <script type="text/javascript" th:inline="javascript">
         layui.config({
             base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
         }).use(['jquery','form'],function(){
             var msg = [[${msg}]];
             if (msg) {
-                layer.msg(msg);
+                alert(msg);
             }
             $("#submit_btn").click(function () {
                 var $ = layui.$,form = layui.form;
@@ -161,19 +161,19 @@
                 var course_week = $("#course_week").val();
 
                 if (course_name.length == 0) {
-                    layer.msg("请输入课程名称");
+                    alert("请输入课程名称");
                 } else if (course_uploadFile1.length == 0) {
-                    layer.msg("请上传视频课程");
+                    alert("请上传视频课程");
                 }else if (course_uploadFile2.length == 0) {
-                    layer.msg("请输入课程封面图");
+                    alert("请输入课程封面图");
                 }else if (course_introdue.length == 0) {
-                    layer.msg("请输入课程简介");
+                    alert("请输入课程简介");
                 }else if (course_teacher.length == 0) {
-                    layer.msg("请输入课程老师");
+                    alert("请输入课程老师");
                 }else if (course_timeSection.length == 0) {
-                    layer.msg("请输入课程时间段");
+                    alert("请输入课程时间段");
                 }else if (course_week.length == 0) {
-                    layer.msg("请输入课程所属星期");
+                    alert("请输入课程所属星期");
                 } else {
                     $("#fileForm").attr("action","/insertCourse");
                     $("#fileForm").submit();

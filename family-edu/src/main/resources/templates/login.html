@@ -72,7 +72,7 @@
     <div class="login-bg">
         <div class="login-cont w1200">
             <div class="form-box">
-                <form class="layui-form" action="">
+                <form class="layui-form" action="" id="loginForm">
                     <legend>登录</legend>
                     <div class="layui-form-item">
                         <div class="layui-inline iphone">
@@ -92,7 +92,7 @@
                     </div>
                     <div class="layui-form-item login-btn">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="demo1" id="login_btn">登录</button>
+                            <button class="layui-btn" id="login_btn">登录</button>
                         </div>
                     </div>
                 </form>
@@ -126,26 +126,25 @@
         <p class="coty">edu家教平台版权所有 &copy; 2012-2020</p>
     </div>
 </div>
+<script src="js/util/jquery-3.1.1.min.js" type="application/javascript" charset="UTF-8"></script>
 <script type="text/javascript" th:inline="javascript">
-    layui.config({
-        base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
-    }).use(['jquery', 'form'], function () {
-        var $ = layui.$, form = layui.form;
+    $(function () {
         var msg = [[${msg}]];
         if (msg) {
-            layer.msg(msg);
+            alert(msg);
         }
 
         $("#login_btn").click(function () {
+
             var username = $("#username").val();
             var password = $("#password").val();
             if (username.length == 0) {
-                layer.msg("请输入用户名");
+                alert("请输入用户名");
             } else if (password.length == 0) {
-                layer.msg("请输入密码");
+                alert("请输入密码");
             } else {
-                $(".layui-form").attr("action", "/toLogin");
-                $(".layui-form").submit();
+                $("#loginForm").attr("action", "/toLogin");
+                $("#loginForm").submit();
             }
 
         });
@@ -154,6 +153,7 @@
             $("#selectCourse_from").submit();
         });
     })
+
 
 </script>
 

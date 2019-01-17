@@ -34,11 +34,18 @@ public class EduUserController {
     public String toLogin(EduUser user, HttpServletRequest request) {
         //查询所有的老师
         EntityWrapper<EduUser> entityWrapper = new EntityWrapper<>();
+        List<EduUser> teachList = eduUserService.selectList(entityWrapper.eq("status",2));
+        ServletContext servletContext = request.getServletContext();
+        servletContext.setAttribute("teachList",teachList);
         //登录逻辑
-        entityWrapper.setEntity(user);
-        EduUser eduUser = eduUserService.selectOne(entityWrapper);
+        EntityWrapper<EduUser> entityWrapper2 = new EntityWrapper<>();
+        entityWrapper2.setEntity(user);
+        EduUser eduUser = eduUserService.selectOne(entityWrapper2);
         if (eduUser!=null){
             request.getSession().setAttribute("user",eduUser);
+        }else{
+            request.setAttribute("msg","用户名或者密码错误");
+            return "login";
         }
         return "redirect:/index";
     }

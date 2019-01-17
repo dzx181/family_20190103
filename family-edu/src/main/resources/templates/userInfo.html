@@ -71,14 +71,14 @@
                     <div class="layui-form-item">
                         <div class="layui-inline iphone">
                             <div class="layui-input-inline">
-                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <i class="layui-icon layui-icon-username iphone-icon"></i>
                                 <input type="text" name="username" id="username" placeholder="请输入用户名"
                                        class="layui-input" th:value="${eduUserEdit}==null?'':${eduUserEdit.username}">
                             </div>
                         </div>
                         <div class="layui-inline iphone">
                             <div class="layui-input-inline">
-                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <i class="layui-icon layui-icon-password iphone-icon"></i>
                                 <input type="password" name="password" id="password" placeholder="请输入密码"
                                        class="layui-input" th:value="${eduUserEdit}==null?'':${eduUserEdit.password}">
                             </div>
@@ -93,9 +93,9 @@
 
                         <div class="layui-inline iphone">
                             <div class="layui-input-inline">
-                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <i class="layui-icon layui-icon-male iphone-icon"></i>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">下拉选择框</label>
+                                    <label class="layui-form-label">性别</label>
                                     <div class="layui-input-block">
                                         <select name="sex" >
                                             <option value="" >请选择性别</option>
@@ -109,9 +109,9 @@
 
                         <div class="layui-inline iphone">
                             <div class="layui-input-inline">
-                                <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
+                                <i class="layui-icon layui-icon-group iphone-icon"></i>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">下拉选择框</label>
+                                    <label class="layui-form-label">身份</label>
                                     <div class="layui-input-block">
                                         <select name="status" >
                                             <option value="" >请选择状态</option>
@@ -164,6 +164,7 @@
         <p class="coty">edu家教平台版权所有 &copy; 2012-2020</p>
     </div>
 </div>
+<script src="js/util/jquery-3.1.1.min.js" type="application/javascript" charset="UTF-8"></script>
 <script type="text/javascript" th:inline="javascript">
     layui.config({
         base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录

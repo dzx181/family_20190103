@@ -34,6 +34,7 @@ public class EduRemarkController {
 
     @RequestMapping("/insertRemark")
     public String insertRemark(EduRemark remark, HttpServletRequest request, Integer courseId) {
+
         if (remark != null) {
             HttpSession session = request.getSession();
             EduUser eduUser = (EduUser) session.getAttribute("user");
@@ -51,5 +52,15 @@ public class EduRemarkController {
         return "playViedo";
     }
 
+    @RequestMapping("/delteteRemark")
+    public String delteteRemark(Integer remarkId, Integer courseId, HttpServletRequest request) {
+        eduRemarkService.deleteById(remarkId);
+        //查找具体的视频课程
+        EduCourseVO eduCourse = eduCourseService.showCourseById(courseId);
+        List<EduRemark> eduRemarkList = eduRemarkService.showRemarkByTeachId(eduCourse.getUserTea().getId());
+        request.setAttribute("eduCourseById", eduCourse);
+        request.setAttribute("eduRemarkList", eduRemarkList);
+        return "playViedo";
+    }
 }
 

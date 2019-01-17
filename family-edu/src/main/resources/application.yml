@@ -1,6 +1,6 @@
 #配置端口号
 server:
-  port: 8081
+  port: 8082
   #设置session的超时时间，单位是分钟
   servlet:
     session:

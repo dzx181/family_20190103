@@ -82,7 +82,7 @@
     </div>
     <div class=" w1200" style="margin-top: 15px;">
         <div class="form-box">
-            <form class="layui-form" action="">
+            <form class="layui-form" action="" id="remark_form" th:if="${session.user.status}==3">
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">评价：</label>
                     <div class="layui-input-block">
@@ -145,9 +145,9 @@
                         class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i><i
                         class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i> </span>
             </p>
+           <div style="float: right;"> <a th:href="'delteteRemark?remarkId='+${remark.id}+'&courseId='+${eduCourseById.id}" th:if="${session.user.status}==1"><span class="layui-icon layui-icon-delete" style="font-size: xx-large"></span></a></div>
 
         </div>
-
     </div>
     <div class="after-sale w1200">
         <h4>配送售后</h4>
@@ -174,29 +174,22 @@
     </div>
 </div>
 
+<script src="js/util/jquery-3.1.1.min.js" type="application/javascript" charset="UTF-8"></script>
 <script type="text/javascript" th:inline="javascript">
-    layui.use('form', function () {
-        var form = layui.form;
 
-    });
-    layui.config({
-        base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
-    }).use(['jquery', 'form'], function () {
-        var $ = layui.$, form = layui.form;
-        var msg = [[${msg}]];
-        if (msg) {
-            layer.msg(msg);
-        }
-        var msg = [[${msg}]];
-        if (msg) {
-            layer.msg(msg);
-        }
+       $(function () {
+           var msg = [[${msg}]];
+           if (msg) {
+               alert(msg);
+           }
+       })
+
         $("#submit_btn").click(function () {
-            $(".layui-form").attr("action", "/insertRemark");
-            $(".layui-form").submit();
+            $("#remark_form").attr("action", "/insertRemark");
+            $("#remark_form").submit();
         });
 
-    })
+
     layui.config({
         base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
     }).use(['jquery','form'],function(){

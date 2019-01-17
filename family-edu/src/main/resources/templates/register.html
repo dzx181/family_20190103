@@ -66,7 +66,7 @@
     <div class="login-bg">
       <div class="login-cont w1200">
         <div class="form-box">
-          <form class="layui-form" action="">
+          <form class="layui-form"  id="register_form">
             <legend>注册</legend>
             <div class="layui-form-item">
               <div class="layui-inline iphone">
@@ -94,7 +94,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">性别</label>
                     <div class="layui-input-block">
-                      <select name="sex" lay-filter="aihao">
+                      <select name="sex" id="sex">
                         <option value="">请选择性别</option>
                         <option value="男">男</option>
                         <option value="女">女</option>
@@ -110,7 +110,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">身份</label>
                     <div class="layui-input-block">
-                      <select name="status" lay-filter="aihao">
+                      <select name="status" id="status">
                         <option value="">请选择您的身份</option>
                         <option value="1">管理员</option>
                         <option value="2">老师</option>
@@ -124,7 +124,7 @@
             </div>
             <div class="layui-form-item login-btn">
               <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="register_btn">注册</button>
+                <button class="layui-btn"  id="register_btn">注册</button>
               </div>
             </div>
           </form>
@@ -143,7 +143,7 @@
         </p>
       </div>
     </div>
-    <div class="mod_help w1200">                                     
+    <div class="mod_help w1200">
       <p>
         <a href="javascript:;">关于我们</a>
         <span>|</span>
@@ -158,51 +158,48 @@
       <p class="coty">edu家教平台版权所有 &copy; 2012-2020</p>
     </div>
   </div>
+  <script src="js/util/jquery-3.1.1.min.js" type="application/javascript" charset="UTF-8"></script>
   <script type="text/javascript" th:inline="javascript">
-   layui.config({
-      base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
-    }).use(['jquery','form'],function(){
-          var $ = layui.$,form = layui.form;
-          var msg = [[${msg}]];
-          if (msg){
-              layer.msg(msg);
-          }
 
-   $("#register_btn").click(function () {
-       $(".layui-form").attr("action","/insertCourse");
-       $(".layui-form").submit();
-   });
-
-    })
    layui.config({
        base: 'js/util' //你存放新模块的目录，注意，不是layui的模块目录
-   }).use(['jquery','form'],function(){
-       var $ = layui.$,form = layui.form;
-       var username = $("#username").val();
-       var password = $("#password").val();
-       var phone = $("#phone").val();
-       var status = $("#status").val();
-       var sex = $("#sex").val();
-       if (username.length == 0) {
-           layer.msg("请输入用户名");
-       } else if (password.length == 0) {
-           layer.msg("请输入密码");
-       }else if (phone.length == 0) {
-           layer.msg("请输入手机号码");
-       }else if (status.length == 0) {
-           layer.msg("请输入身份");
-       }else if (sex.length == 0) {
-           layer.msg("请输入性别");
-       } else {
-           $(".layui-form").attr("action", "/toRegister");
-           $(".layui-form").submit();
+   }).use(['jquery','form'],function() {
+       var $ = layui.$, form = layui.form;
+   })
+       var msg = [[${msg}]];
+       if (msg){
+           alert(msg);
        }
+
+
+       $("#register_btn").click(function () {
+           var username = document.getElementById("username").value;
+           var password = $("#password").val();
+           var phone = $("#phone").val();
+           var status = $("#status").val();
+           var sex = $("#sex").val();
+           if (username.length == 0) {
+               alert(" 请输入用户名");
+           } else if (password.length == 0) {
+               alert("请输入密码");
+           }else if (phone.length == 0) {
+               alert("请输入手机号码");
+           }else if (status.length == 0) {
+               alert("请输入身份");
+           }else if (sex.length == 0) {
+               alert("请输入性别");
+           } else {
+               $("#register_form").attr("action", "/toRegister");
+               $("#register_form").submit();
+           }
+       });
+
        $("#select_btn").click(function () {
            $("#selectCourse_from").attr("action","/selectEduCourse");
            $("#selectCourse_from").submit();
        });
 
-   })
+
   </script>
 
 </body>
